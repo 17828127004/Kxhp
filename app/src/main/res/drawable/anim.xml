@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:drawable="@drawable/lodingjiu" android:duration="250"/>
+        <item android:drawable="@drawable/loding_wenzi" android:duration="30"/>
+        <item android:drawable="@drawable/lodingyi" android:duration="250"/>
+        <item android:drawable="@drawable/lodingjiu" android:duration="250"/>
+        <item android:drawable="@drawable/loding_wenzi" android:duration="30"/>
+        <item android:drawable="@drawable/lodingyi" android:duration="250"/>
+</animation-list>
