@@ -47,7 +47,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private View layoutView;
     private CircleImageView cImage;
     private RelativeLayout rl_heart;//头像
-    private RelativeLayout rl_my_timeting, rl_record,  rl_store,  rl_service_center, rl_welcome;
+    private RelativeLayout rl_my_timeting, rl_record,  rl_store,  rl_service_center;
     private TextView tv_name;
     private ImageView iv_vip;
     private TextView tv_card;//会员卡
@@ -89,7 +89,6 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         rl_record = (RelativeLayout) layoutView.findViewById(R.id.rl_record);
         rl_store = (RelativeLayout) layoutView.findViewById(R.id.rl_store);
         rl_service_center = (RelativeLayout) layoutView.findViewById(R.id.rl_service_center);
-        rl_welcome = (RelativeLayout) layoutView.findViewById(R.id.rl_welcome);
         tv_name = (TextView) layoutView.findViewById(R.id.textView);
         iv_vip = (ImageView) layoutView.findViewById(R.id.iv_vip);
         tv_card = (TextView) layoutView.findViewById(R.id.tv_card);
@@ -106,7 +105,6 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         rl_my_timeting.setOnClickListener(this);
         rl_record.setOnClickListener(this);
         rl_service_center.setOnClickListener(this);
-        rl_welcome.setOnClickListener(this);
         rl_store.setOnClickListener(this);
         tv_card.setOnClickListener(this);
     }
@@ -147,12 +145,6 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             case R.id.rl_service_center://服务中心
                 i.setClass(getActivity(), ServiceActivity.class);
                 startActivity(i);
-                break;
-            case R.id.rl_welcome://欢迎评分
-                Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
                 break;
             case R.id.rl_store://积分商城
                 if(userId.equals("")){
