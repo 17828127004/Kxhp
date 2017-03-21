@@ -35,6 +35,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="15dp"
+                android:src="@drawable/happy_mine"
                 android:scaleType="centerCrop"
                 />
         </RelativeLayout>
