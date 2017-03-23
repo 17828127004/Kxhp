@@ -223,4 +223,5 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
 }

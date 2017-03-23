@@ -16,9 +16,11 @@ import util.TitleUtil;
 /**
  * Created by Administrator on 2017/3/2.
  */
-public class LineServiceActivity extends Activity{
+
+public class LineServiceActivity extends Activity {
     private WebView wv_store;
     private ProgressBar pb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +38,8 @@ public class LineServiceActivity extends Activity{
         pb = (ProgressBar) findViewById(R.id.pb_store);
         WebSettings webSettings = wv_store.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setBuiltInZoomControls(true);// 设置支持缩放
-        webSettings.setSupportZoom(false);// 不支持缩放
-        webSettings.setUseWideViewPort(false);// 将图片调整到适合webview大小
-        webSettings.setLoadWithOverviewMode(true);// 缩放至屏幕的大小
-        String url="http://www2.53kf.com/webCompany.php?style=2&arg=10103225";
+        webSettings.setUseWideViewPort(true);// 将图片调整到适合webview大小
+        String url = "http://www2.53kf.com/webCompany.php?style=2&arg=10103225";
         wv_store.loadUrl(url);
         new TitleUtil(this).setTitleName("在线客服").setLeftImage(R.drawable.happy_mine_back)
                 .setLeftOnClickListener(new View.OnClickListener() {

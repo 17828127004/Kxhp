@@ -2,6 +2,7 @@ package com.kxhl.activity.myActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,11 +40,21 @@ public class ServiceActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_service_service://在线客服
-                startActivity(new Intent(ServiceActivity.this, LineServiceActivity.class));
+                startActivity(new Intent(this, LineServiceActivity.class));
                 break;
             case R.id.ll_service_phone://客服热线
-
+                call("4000616123");//客服电话
                 break;
         }
+    }
+    /**
+     * 调用拨号界面
+     *
+     * @param phone 电话号码
+     */
+    private void call(String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
