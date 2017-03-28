@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_selector"
     android:orientation="vertical">
 
@@ -212,50 +213,15 @@
             android:text="项目介绍"
             android:textColor="@color/tab_text_bg"
             android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginLeft="25dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_store_poject_bj"
-                android:gravity="center"
-                android:text="烘培区"
-                android:textColor="@color/bg_white"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_store_poject_bj"
-                android:gravity="center"
-                android:text="镜子迷宫"
-                android:textColor="@color/bg_white"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_store_poject_bj"
-                android:gravity="center"
-                android:text="小转马"
-                android:textColor="@color/bg_white"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_store_poject_bj"
-                android:gravity="center"
-                android:text="智勇闯关"
-                android:textColor="@color/bg_white"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"/>
-        </LinearLayout>
+<com.fyales.tagcloud.library.TagCloudLayout
+    android:id="@+id/tcl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    app:lineSpacing="10dp"
+    app:tagSpacing="10dp"
+    />
     </LinearLayout>
 
     <RelativeLayout

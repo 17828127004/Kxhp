@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import util.Config;
 import util.KxhlRestClient;
 import util.TitleUtil;
 import util.UrlLIst;
@@ -113,14 +115,12 @@ tv_babySex.setOnClickListener(new View.OnClickListener() {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushData(mPhone,et_address.getText().toString(),et_babyName.getText().toString(),tv_babyBirthday.getText().toString()
-                ,mchi_sex,et_passWord.getText().toString(),et_name.getText().toString());
-//                pushData(mPhone,
-//                        et_address.getText().toString(),
-//                        et_babyName.getText().toString(), et_babyBirthday.getText().toString(),
-//                        mchi_sex, mSex,
-//                        et_passWord.getText().toString(),
-//                        et_name.getText().toString());
+                if(Config.isEmaill(et_address.getText().toString())|| TextUtils.isEmpty(et_address.getText())){
+                    pushData(mPhone,et_address.getText().toString(),et_babyName.getText().toString(),tv_babyBirthday.getText().toString()
+                            ,mchi_sex,et_passWord.getText().toString(),et_name.getText().toString());
+                }else {
+                    Toast.makeText(RegisterInfoActivity.this,"邮箱格式错误!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

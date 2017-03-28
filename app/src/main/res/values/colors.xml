@@ -22,6 +22,7 @@
     <!--预约-->
     <color name="time">#F4F4F4</color>
     <color name="time_txt">#595959</color>
+    <color name="lable">#FC5077</color>
     <!--修改密码-->
     <color name="setpassword_code">#8C8C8C</color>
     <!-- 上传图片添加的颜色 -->

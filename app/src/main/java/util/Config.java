@@ -39,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.KeyStore;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,8 +55,8 @@ public class Config {
     public static final String VIP_CARD = "vipCard";//vip卡号
     public static final String POINT = "point";//积分
     public static final String HEADPHOTO = "headPhoto";//头像
-    public static final String VIP_CHECK="vip_check";//判断vip
-    public static final String USER_PHONE="phone";//电话
+    public static final String VIP_CHECK = "vip_check";//判断vip
+    public static final String USER_PHONE = "phone";//电话
 
     /**
      * 判断手机网络
@@ -157,35 +158,52 @@ public class Config {
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
         return bitmap;
     }
+
     /**
      * 将Bitmap转换成文件
      * 保存文件
+     *
      * @param bm
      * @param fileName
      * @throws IOException
      */
     public static File saveFile(Bitmap bm, String path, String fileName) throws IOException {
         File dirFile = new File(path);
-        if(!dirFile.exists()){
+        if (!dirFile.exists()) {
             dirFile.mkdir();
         }
-        File myCaptureFile = new File(path , fileName);
+        File myCaptureFile = new File(path, fileName);
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
         bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
         bos.flush();
         bos.close();
         return myCaptureFile;
     }
-/**
- * 将集合转换成字符串已逗号间隔
- */
-public static String listToString(List<String> list){
-    StringBuffer sb=new StringBuffer();
-    for(int i=0;i<list.size();i++){
+
+    /**
+     * 将集合转换成字符串已逗号间隔
+     */
+    public static String listToString(List<String> list) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(i)).append(",");
+        }
+        return sb.toString();
     }
-    return sb.toString();
-}
+
+    /**
+     *
+     */
+    public static List<String> stringToList(String s) {
+
+        String[] array = s.split(",");
+        List<String> abcList = new ArrayList<String>();
+        for (String str : array) {
+            abcList.add(str);
+        }
+        return abcList;
+    }
+
     /**
      * 验证手机格式
      */
@@ -199,5 +217,13 @@ public static String listToString(List<String> list){
         String telRegex = "[1][34578]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
         if (TextUtils.isEmpty(mobiles)) return false;
         else return mobiles.matches(telRegex);
+    }
+
+    /**
+     * 邮箱正则表达式
+     */
+    public static boolean isEmaill(String emaill) {
+        String temp = "^(\\w+((-\\w+)|(\\.\\w+))*)\\+\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$";
+        return emaill.matches(temp);
     }
 }

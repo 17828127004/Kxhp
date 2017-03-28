@@ -192,8 +192,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="37dp"
                     android:gravity="center_vertical"
-                    android:text="宝宝生日"
                     android:textColor="@color/tab_text_bg"
+                    android:hint="宝宝生日"
                     android:textSize="14sp" />
             </RelativeLayout>
             <RelativeLayout
