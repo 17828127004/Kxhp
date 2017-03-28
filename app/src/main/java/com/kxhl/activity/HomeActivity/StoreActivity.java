@@ -112,12 +112,6 @@ public class StoreActivity extends Activity {
                 pushStore(storeId, (String) SaveData.get(StoreActivity.this, Config.USERID, ""), time);
             }
         });
-//        mList.add("智勇球池闯关");
-//        mList.add("VR模型");
-//        adapter=new TagMyBaseAdapter(this,mList);
-//        Log.i("TagCloudLayout",mList.toString());
-//        mTagCloudLayout.setAdapter(adapter);
-//        mTagCloudLayout.setAdapter(new TagMyBaseAdapter(StoreActivity.this,mList));
     }
 
     /**
@@ -149,7 +143,6 @@ public class StoreActivity extends Activity {
         mList.add("VR模型");
         mList.add("镜子迷宫");
         mList.add("小转马");
-        mList.add("极速飞车");
         adapter=new TagMyBaseAdapter(this,mList);
         Log.i("TagCloudLayout",mTagCloudLayout.toString());
         mTagCloudLayout.setAdapter(adapter);
