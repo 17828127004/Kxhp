@@ -140,7 +140,6 @@ public class StoreActivity extends Activity {
         btn_storeMsg_time = (Button) findViewById(R.id.btn_storeMsg_time);
         mTagCloudLayout = (TagCloudLayout) findViewById(R.id.tcl);
         mList.add("智勇球池闯关");
-        mList.add("VR模型");
         mList.add("镜子迷宫");
         mList.add("小转马");
         adapter=new TagMyBaseAdapter(this,mList);
