@@ -421,7 +421,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.iv_homeTalk:
                 if (s.equals("")) {
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    Toast.makeText(getActivity(),"请登录！",Toast.LENGTH_SHORT).show();
                 } else {
                     startActivity(new Intent(getActivity(), TalkActivity.class));
                 }
@@ -439,13 +439,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.iv_homeMsg:
-                if (s.equals("")) {
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                } else {
                     startActivity(new Intent(getActivity(), MsgActivity.class));
-                }
-
-
                 break;
             case R.id.iv_homePhoto:
                 if (s.equals("")) {
