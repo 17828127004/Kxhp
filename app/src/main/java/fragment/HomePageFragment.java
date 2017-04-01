@@ -421,7 +421,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.iv_homeTalk:
                 if (s.equals("")) {
-                    Toast.makeText(getActivity(),"请登录！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
                 } else {
                     startActivity(new Intent(getActivity(), TalkActivity.class));
                 }
