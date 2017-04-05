@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.fyales.tagcloud.library.TagCloudLayout;
+import com.fynn.fluidlayout.FluidLayout;
 import com.kxhl.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -47,6 +49,8 @@ import util.SaveData;
 import util.UrlLIst;
 import view.LoadingDialog;
 
+
+
 /**
  * Created by Administrator on 2017/1/20.
  */
@@ -62,8 +66,7 @@ public class StoreActivity extends Activity {
     private ImageView iv_storeMsg_back;
     private Button btn_storeMsg_time;
     private LoadingDialog dialog;
-    private TagCloudLayout mTagCloudLayout;
-    private TagMyBaseAdapter adapter;
+    private FluidLayout mTagCloudLayout;
     private List<String> mList=new ArrayList<>();
     private Handler handler = new Handler() {
         @Override
@@ -99,7 +102,7 @@ public class StoreActivity extends Activity {
         storeId = bundle.getString("storeId");
         time = bundle.getString("time");
         initView();
-        getMsg(storeId);
+
         iv_storeMsg_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,12 +115,7 @@ public class StoreActivity extends Activity {
                 pushStore(storeId, (String) SaveData.get(StoreActivity.this, Config.USERID, ""), time);
             }
         });
-//        mList.add("智勇球池闯关");
-//        mList.add("VR模型");
-//        adapter=new TagMyBaseAdapter(this,mList);
-//        Log.i("TagCloudLayout",mList.toString());
-//        mTagCloudLayout.setAdapter(adapter);
-//        mTagCloudLayout.setAdapter(new TagMyBaseAdapter(StoreActivity.this,mList));
+
     }
 
     /**
@@ -144,16 +142,30 @@ public class StoreActivity extends Activity {
         iv_storeMsg_phone = (ImageView) findViewById(R.id.iv_storeMsg_phone);
         iv_storeMsg_back = (ImageView) findViewById(R.id.iv_storeMsg_back);
         btn_storeMsg_time = (Button) findViewById(R.id.btn_storeMsg_time);
-        mTagCloudLayout = (TagCloudLayout) findViewById(R.id.tcl);
-        mList.add("智勇球池闯关");
-        mList.add("VR模型");
-        mList.add("镜子迷宫");
-        mList.add("小转马");
-        mList.add("极速飞车");
-        adapter=new TagMyBaseAdapter(this,mList);
-        Log.i("TagCloudLayout",mTagCloudLayout.toString());
-        mTagCloudLayout.setAdapter(adapter);
+        mTagCloudLayout = (FluidLayout) findViewById(R.id.tcl);
+        getMsg(storeId);
     }
+
+private void addTextView(List<String> str){
+    mTagCloudLayout.removeAllViews();
+    mTagCloudLayout.setGravity(Gravity.CENTER);
+   for (int i=0;i<str.size();i++){
+       TextView tv = new TextView(this);
+       tv.setText(str.get(i));
+       tv.setTextColor(Color.rgb(255,255,255));
+       tv.setTextSize(12);
+       tv.setBackgroundResource(R.drawable.btn_red_lable);
+       FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
+               ViewGroup.LayoutParams.WRAP_CONTENT,
+               ViewGroup.LayoutParams.WRAP_CONTENT
+       );
+       params.setMargins(12, 12, 12, 12);
+       mTagCloudLayout.addView(tv, params);
+   }
+
+
+}
+
 
 
     public void getMsg(String id) {
@@ -171,9 +183,16 @@ public class StoreActivity extends Activity {
                         tv_storeMsg_time.setText("营业时间：" + response.getString("time"));
                         String logo = response.getString("logo");
                         mList.addAll(Config.stringToList(response.getString("about")));
-//                        mList=Config.stringToList(response.getString("about"));
-                        Log.i("TagCloudLayout获取的数据1",mList.toString());
+                        mList=Config.stringToList(response.getString("about"));
 
+                        addTextView(mList);
+
+
+//                        adapter=new TagMyBaseAdapter(StoreActivity.this,mList);
+//                        Log.i("msg",mList.toString());
+
+
+                       // mTagCloudLayout.setAdapter(adapter);
                         Glide.with(StoreActivity.this).load(logo).asBitmap().
                                 into(new SimpleTarget<Bitmap>() {
                                     @Override
@@ -303,53 +322,5 @@ public class StoreActivity extends Activity {
             }
         });
         builder.show();
-    }
-
-
-     class TagMyBaseAdapter extends BaseAdapter {
-
-        private Context mContext;
-        private List<String> list;
-        public TagMyBaseAdapter(Context context, List<String> list) {
-            this.mContext = context;
-           this.list = list;
-            Log.i("项目介绍::::::you duos ", String.valueOf(list.size()));
-        }
-
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public String getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-            if (convertView == null) {
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_store_labe, null);
-                holder = new ViewHolder();
-                holder.tagBtn = (Button) convertView.findViewById(R.id.tag_btn);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            String text = getItem(position);
-            Log.i("项目介绍::::::46545sdfsd",text);
-            holder.tagBtn.setText(text);
-            return convertView;
-        }
-
-        private class ViewHolder {
-            Button tagBtn;
-        }
     }
 }

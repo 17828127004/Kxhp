@@ -37,4 +37,5 @@ dependencies {
     compile 'com.xhb:xbanner:1.2.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.fyales.android:library:1.0.2'
+    compile 'com.fynn.fluidlayout:fluidlayout:1.0'
 }

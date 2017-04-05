@@ -201,8 +201,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@color/bg_white"
         android:orientation="vertical">
 
@@ -213,14 +212,14 @@
             android:text="项目介绍"
             android:textColor="@color/tab_text_bg"
             android:textSize="14sp" />
-<com.fyales.tagcloud.library.TagCloudLayout
+<com.fynn.fluidlayout.FluidLayout
     android:id="@+id/tcl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
    android:layout_marginRight="15dp"
     android:layout_marginLeft="15dp"
-    app:lineSpacing="10dp"
-    app:tagSpacing="10dp"
+    android:padding="5dp"
+
     />
     </LinearLayout>
 
