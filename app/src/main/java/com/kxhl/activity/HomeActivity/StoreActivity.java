@@ -78,6 +78,7 @@ public class StoreActivity extends Activity {
             switch (msg.what) {
                 case 00:
                     dialog.dismiss();
+
                     break;
             }
         }
@@ -104,8 +105,7 @@ public class StoreActivity extends Activity {
         if (Config.hasInternet(this)) {
             dialog = new LoadingDialog(this);
             dialog.show();
-//            MyAnomation myAnomation=MyAnomation.getInstace(this);
-//            myAnomation.getAnimation();
+
         }
         Bundle bundle = getIntent().getExtras();//得到传过来的bundle
         storeId = bundle.getString("storeId");
@@ -159,6 +159,7 @@ public class StoreActivity extends Activity {
         mTagCloudLayout.removeAllViews();
         mTagCloudLayout.setGravity(Gravity.CENTER);
         for (int i = 0; i < str.size(); i++) {
+            Log.e("msg","有没有数据啊啊啊啊啊啊啊啊     "+":  "+str.size());
             TextView tv = new TextView(this);
             tv.setText(str.get(i));
             tv.setTextColor(Color.rgb(255, 255, 255));
@@ -190,10 +191,15 @@ public class StoreActivity extends Activity {
                         tv_storeMsg_address.setText("地址：" + response.getString("location"));
                         tv_storeMsg_time.setText("营业时间：" + response.getString("time"));
                         String logo = response.getString("logo");
-                        mList.addAll(Config.stringToList(response.getString("about")));
+                        Log.e("msg<<<<<<","logo"+response.getString("about"));
+                        if (!response.getString("about").isEmpty()){
+                            mList.addAll(Config.stringToList(response.getString("about")));
 
-                        mList = Config.stringToList(response.getString("about"));
-                        addTextView(mList);
+                            mList = Config.stringToList(response.getString("about"));
+                            Log.e("msg","有没有数据啊啊啊啊啊啊啊啊>>>>>>>>>>     "+":  "+mList.size());
+                            addTextView(mList);
+                        }
+
 
 
                         Glide.with(StoreActivity.this).load(logo).asBitmap().
