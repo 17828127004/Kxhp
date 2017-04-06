@@ -30,8 +30,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.fyales.tagcloud.library.TagCloudLayout;
 import com.fynn.fluidlayout.FluidLayout;
+
+
 import com.kxhl.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -48,6 +49,7 @@ import util.KxhlRestClient;
 import util.SaveData;
 import util.UrlLIst;
 import view.LoadingDialog;
+import view.MyAnomation;
 
 
 /**
@@ -66,7 +68,10 @@ public class StoreActivity extends Activity {
     private Button btn_storeMsg_time;
     private LoadingDialog dialog;
     private FluidLayout mTagCloudLayout;
+
+
     private List<String> mList = new ArrayList<>();
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -93,16 +98,20 @@ public class StoreActivity extends Activity {
             window.setStatusBarColor(Color.TRANSPARENT);
             window.setNavigationBarColor(Color.TRANSPARENT);
         }
+
         setContentView(R.layout.activity_store);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         if (Config.hasInternet(this)) {
             dialog = new LoadingDialog(this);
             dialog.show();
+//            MyAnomation myAnomation=MyAnomation.getInstace(this);
+//            myAnomation.getAnimation();
         }
         Bundle bundle = getIntent().getExtras();//得到传过来的bundle
         storeId = bundle.getString("storeId");
         time = bundle.getString("time");
         initView();
-
+        getMsg(storeId);
         iv_storeMsg_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +124,6 @@ public class StoreActivity extends Activity {
                 pushStore(storeId, (String) SaveData.get(StoreActivity.this, Config.USERID, ""), time);
             }
         });
-
     }
 
     /**
@@ -143,8 +151,9 @@ public class StoreActivity extends Activity {
         iv_storeMsg_back = (ImageView) findViewById(R.id.iv_storeMsg_back);
         btn_storeMsg_time = (Button) findViewById(R.id.btn_storeMsg_time);
         mTagCloudLayout = (FluidLayout) findViewById(R.id.tcl);
-        getMsg(storeId);
+
     }
+
 
     private void addTextView(List<String> str) {
         mTagCloudLayout.removeAllViews();
@@ -182,8 +191,11 @@ public class StoreActivity extends Activity {
                         tv_storeMsg_time.setText("营业时间：" + response.getString("time"));
                         String logo = response.getString("logo");
                         mList.addAll(Config.stringToList(response.getString("about")));
+
                         mList = Config.stringToList(response.getString("about"));
                         addTextView(mList);
+
+
                         Glide.with(StoreActivity.this).load(logo).asBitmap().
                                 into(new SimpleTarget<Bitmap>() {
                                     @Override
@@ -262,6 +274,7 @@ public class StoreActivity extends Activity {
         });
 
     }
+
     /**
      * 预约门店
      */
@@ -297,6 +310,7 @@ public class StoreActivity extends Activity {
             }
         });
     }
+
     public void getDialog(String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
         builder.setTitle(title);
@@ -309,4 +323,6 @@ public class StoreActivity extends Activity {
         });
         builder.show();
     }
+
+
 }
