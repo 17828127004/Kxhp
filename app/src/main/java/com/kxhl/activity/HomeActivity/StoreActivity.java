@@ -50,7 +50,6 @@ import util.UrlLIst;
 import view.LoadingDialog;
 
 
-
 /**
  * Created by Administrator on 2017/1/20.
  */
@@ -67,17 +66,18 @@ public class StoreActivity extends Activity {
     private Button btn_storeMsg_time;
     private LoadingDialog dialog;
     private FluidLayout mTagCloudLayout;
-    private List<String> mList=new ArrayList<>();
+    private List<String> mList = new ArrayList<>();
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch(msg.what){
+            switch (msg.what) {
                 case 00:
                     dialog.dismiss();
                     break;
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,30 +146,29 @@ public class StoreActivity extends Activity {
         getMsg(storeId);
     }
 
-private void addTextView(List<String> str){
-    mTagCloudLayout.removeAllViews();
-    mTagCloudLayout.setGravity(Gravity.CENTER);
-   for (int i=0;i<str.size();i++){
-       TextView tv = new TextView(this);
-       tv.setText(str.get(i));
-       tv.setTextColor(Color.rgb(255,255,255));
-       tv.setTextSize(12);
-       tv.setBackgroundResource(R.drawable.btn_red_lable);
-       FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
-               ViewGroup.LayoutParams.WRAP_CONTENT,
-               ViewGroup.LayoutParams.WRAP_CONTENT
-       );
-       params.setMargins(12, 12, 12, 12);
-       mTagCloudLayout.addView(tv, params);
-   }
+    private void addTextView(List<String> str) {
+        mTagCloudLayout.removeAllViews();
+        mTagCloudLayout.setGravity(Gravity.CENTER);
+        for (int i = 0; i < str.size(); i++) {
+            TextView tv = new TextView(this);
+            tv.setText(str.get(i));
+            tv.setTextColor(Color.rgb(255, 255, 255));
+            tv.setTextSize(12);
+            tv.setBackgroundResource(R.drawable.btn_red_lable);
+            FluidLayout.LayoutParams params = new FluidLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(12, 12, 12, 12);
+            mTagCloudLayout.addView(tv, params);
+        }
 
 
-}
-
+    }
 
 
     public void getMsg(String id) {
-        mList=new ArrayList<String>();
+        mList = new ArrayList<String>();
         RequestParams params = new RequestParams();
         params.put("id", id);
         KxhlRestClient.post(UrlLIst.APPOINTMENT_SHOW, params, new JsonHttpResponseHandler() {
@@ -183,16 +182,8 @@ private void addTextView(List<String> str){
                         tv_storeMsg_time.setText("营业时间：" + response.getString("time"));
                         String logo = response.getString("logo");
                         mList.addAll(Config.stringToList(response.getString("about")));
-                        mList=Config.stringToList(response.getString("about"));
-
+                        mList = Config.stringToList(response.getString("about"));
                         addTextView(mList);
-
-
-//                        adapter=new TagMyBaseAdapter(StoreActivity.this,mList);
-//                        Log.i("msg",mList.toString());
-
-
-                       // mTagCloudLayout.setAdapter(adapter);
                         Glide.with(StoreActivity.this).load(logo).asBitmap().
                                 into(new SimpleTarget<Bitmap>() {
                                     @Override
@@ -201,7 +192,6 @@ private void addTextView(List<String> str){
                                         handler.sendEmptyMessage(00);
                                     }
                                 });
-
                         switch (response.getString("star")) {
                             case "5":
                                 iv_storeMsg_start1.setImageResource(R.drawable.start);
@@ -262,7 +252,6 @@ private void addTextView(List<String> str){
                     });
                 }
                 super.onSuccess(statusCode, headers, response);
-
             }
 
             @Override
@@ -277,7 +266,6 @@ private void addTextView(List<String> str){
      * 预约门店
      */
     public void pushStore(String storeId, String userId, String time) {
-
         RequestParams params = new RequestParams();
         params.put("sid", storeId);
         params.put("uid", userId);
@@ -309,8 +297,6 @@ private void addTextView(List<String> str){
             }
         });
     }
-
-
     public void getDialog(String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
         builder.setTitle(title);
