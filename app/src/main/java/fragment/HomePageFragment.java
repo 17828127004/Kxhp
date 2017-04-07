@@ -2,7 +2,6 @@ package fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -49,7 +48,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.CircleImage;
+import bean.UPMarqueeViewData;
 import util.Config;
 import util.KxhlRestClient;
 import util.SaveData;
@@ -73,9 +72,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private View layoutView;
     private WebView wv_home;
     private UPMarqueeView upview1;
-    private List<String> data;
-    private List<View> views;
-    private List<String> mUrls;
+
     private LoadingDialog dialog;
     private ScrollView mSv;
     private String mWebINdex = "0";
@@ -85,16 +82,17 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private List<String> mPhotoName;//成长相册name
     private List<String> mPhotoPath;//成长相册path
     private List<String> mPhotoPic;//成长相册pic
-    private MyImg iv_home_vr,iv_home_vr1, iv_home_vr2, iv_home_vr3;
+    private MyImg iv_home_vr, iv_home_vr1, iv_home_vr2, iv_home_vr3;
     private LayoutInflater mInflater;
     // 显示轮播图片
     private XBanner mBannerNet;
-
+   private List<UPMarqueeViewData> data ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         layoutView = inflater.inflate(R.layout.fragment_homepage, container, false);
         new TitleUtil(layoutView).setTitleName("首页");
         dialog = new LoadingDialog(getActivity());
+        data = new ArrayList<UPMarqueeViewData>();
         dialog.show();
         mInflater = LayoutInflater.from(getActivity());
         return layoutView;
@@ -109,6 +107,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         getPhoto();
         getVip((String) SaveData.get(getActivity(), Config.USER_PHONE, ""));
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -138,7 +137,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         iv_home_vr1 = (MyImg) layoutView.findViewById(R.id.iv_home_vr1);
         iv_home_vr2 = (MyImg) layoutView.findViewById(R.id.iv_home_vr2);
         iv_home_vr3 = (MyImg) layoutView.findViewById(R.id.iv_home_vr3);
-        mBannerNet=(XBanner)layoutView.findViewById(R.id.banner);
+        mBannerNet = (XBanner) layoutView.findViewById(R.id.banner);
         iv_home_vr.setColor(0x38000000);
         iv_home_vr1.setColor(0x38000000);
         iv_home_vr2.setColor(0x38000000);
@@ -171,7 +170,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                         for (int i = 0; i < array.length(); i++) {
                             mBannerUrl.add(i, array.getString(i));
                         }
-                mBannerNet.setData(mBannerUrl,null);
+                        mBannerNet.setData(mBannerUrl, null);
                         mBannerNet.setmAdapter(new XBanner.XBannerAdapter() {
                             @Override
                             public void loadBanner(XBanner banner, View view, int position) {
@@ -285,8 +284,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         wv_home.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                view.loadUrl(url);
-//                Log.i("fesrgerghrtgtrg","tryhrteyher");
+
 
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 Bundle bundle = new Bundle();
@@ -295,6 +293,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 return true;
             }
+
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
@@ -307,105 +306,32 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
      * 初始化界面程序
      */
     private void initView() {
-        setView();
-        upview1.setViews(views);
+        upview1.setViews(data);
         /**
          * 设置item_view的监听
          */
         upview1.setOnItemClickListener(new UPMarqueeView.OnItemClickListener() {
             @Override
-            public void onItemClick(int position, View view) {
-////                Toast.makeText(getActivity(), "你点击了第几个items" + position, Toast.LENGTH_SHORT).show();
-//                Intent i=new Intent(getActivity(),NewsTwoActivity.class);
-//                    Bundle bundle=new Bundle();
-//                    bundle.putString("newTwo",mUrls.get(position));
-//                    i.putExtras(bundle);
-//                    startActivity(i);
+            public void onItemClick(int position) {
+                Log.e("msggggg>>>>", "你点击了第几个items:" + position);
+                Intent i = new Intent(getActivity(), NewsTwoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("newTwo", data.get(position).getUrl());
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
     }
 
-    /**
-     * 初始化需要循环的View
-     * 为了灵活的使用滚动的View，所以把滚动的内容让用户自定义
-     * 假如滚动的是三条或者一条，或者是其他，只需要把对应的布局，和这个方法稍微改改就可以了，
-     */
-    private void setView() {
-        for (int i = 0; i < data.size(); i = i + 2) {
-            final int position = i;
-            //设置滚动的单个布局
-            LinearLayout moreView = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.item_view, null);
-            //初始化布局的控件
-            TextView tv1 = (TextView) moreView.findViewById(R.id.tv1);
-            TextView tv2 = (TextView) moreView.findViewById(R.id.tv2);
-
-            /**
-             * 设置监听
-             */
-            moreView.findViewById(R.id.rl).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Toast.makeText(getActivity(), position + "你点击了" + data.get(position).toString(), Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getActivity(), NewsActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("new", mUrls.get(position));
-                    i.putExtras(bundle);
-                    startActivity(i);
-                }
-            });
-            /**
-             * 设置监听
-             */
-            moreView.findViewById(R.id.rl2).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Toast.makeText(getActivity(), position + "你点击了" + data.get(position).toString(), Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getActivity(), NewsTwoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("newTwo", mUrls.get(position));
-                    i.putExtras(bundle);
-                    startActivity(i);
-                }
-            });
-            tv1.setText("");
-            tv2.setText("");
-            if (tv1.getText().toString().equals(data.get(i).toString())) {
-
-            } else {
-                //进行对控件赋值
-                tv1.setText(data.get(i).toString());
-                if (data.size() > i + 1) {
-                    //因为淘宝那儿是两条数据，但是当数据是奇数时就不需要赋值第二个，所以加了一个判断，还应该把第二个布局给隐藏掉
-                    tv2.setText(data.get(i + 1).toString());
-                } else {
-                    moreView.findViewById(R.id.rl2).setVisibility(View.GONE);
-                }
-
-                //添加到循环滚动数组里面去
-                views.add(moreView);
-            }
-
-        }
-    }
 
     /**
      * 初始化数据
      */
     private void initdata(JSONArray array) throws JSONException {
-        if (data == null && mUrls == null) {
-            data = new ArrayList<>();
-            mUrls = new ArrayList<>();
-            views = new ArrayList<>();
-        } else {
-            data.clear();
-            mUrls.clear();
-            views.clear();
-        }
         if (data.size() == 0) {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject object = array.getJSONObject(i);
-                data.add(i, object.getString("title"));
-                mUrls.add(i, object.getString("url"));
+                data.add(new UPMarqueeViewData("头条",object.getString("title"),object.getString("url")));
             }
             initView();
         }
@@ -417,11 +343,11 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         String vip = (String) SaveData.get(getActivity(), Config.VIP_CHECK, "");
         switch (v.getId()) {
             case R.id.iv_homeTimeting:
-                    startActivity(new Intent(getActivity(), LineTimeActivity.class));
+                startActivity(new Intent(getActivity(), LineTimeActivity.class));
                 break;
             case R.id.iv_homeTalk:
                 if (s.equals("")) {
-                    Toast.makeText(getActivity(),"请先登录！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
                 } else {
                     startActivity(new Intent(getActivity(), TalkActivity.class));
                 }
@@ -439,7 +365,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.iv_homeMsg:
-                    startActivity(new Intent(getActivity(), MsgActivity.class));
+                startActivity(new Intent(getActivity(), MsgActivity.class));
                 break;
             case R.id.iv_homePhoto:
                 if (s.equals("")) {

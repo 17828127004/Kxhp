@@ -87,21 +87,9 @@ public class StoreActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            window.setNavigationBarColor(Color.TRANSPARENT);
-        }
 
         setContentView(R.layout.activity_store);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         if (Config.hasInternet(this)) {
             dialog = new LoadingDialog(this);
             dialog.show();
@@ -159,7 +147,6 @@ public class StoreActivity extends Activity {
         mTagCloudLayout.removeAllViews();
         mTagCloudLayout.setGravity(Gravity.CENTER);
         for (int i = 0; i < str.size(); i++) {
-            Log.e("msg","有没有数据啊啊啊啊啊啊啊啊     "+":  "+str.size());
             TextView tv = new TextView(this);
             tv.setText(str.get(i));
             tv.setTextColor(Color.rgb(255, 255, 255));
