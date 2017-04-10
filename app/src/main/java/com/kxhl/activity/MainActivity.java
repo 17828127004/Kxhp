@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity {
     private RadioButton rb_timeting;
     private RadioButton rb_my;
     private List<Fragment> fragments = new ArrayList<Fragment>();
+    private int hyc;
 
     //    private Fragment tab_content;
     @Override
