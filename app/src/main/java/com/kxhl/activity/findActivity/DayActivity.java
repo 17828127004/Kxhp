@@ -1,6 +1,7 @@
 package com.kxhl.activity.findActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.kxhl.R;
 
+import util.Config;
 import util.TitleUtil;
 
 /**
@@ -23,6 +25,7 @@ public class DayActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numstore);
+        Config.setTranslucent(this);
     }
 
     @Override

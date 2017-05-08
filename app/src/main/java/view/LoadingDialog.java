@@ -31,7 +31,7 @@ public class LoadingDialog extends Dialog {
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         //3秒完成动画
 //        scaleAnimation.setRepeatMode(3);
-        scaleAnimation.setDuration(300);
+        scaleAnimation.setDuration(250);
         //将AlphaAnimation这个已经设置好的动画添加到 AnimationSet中
         scaleAnimation.setRepeatCount(-1);
         scaleAnimation.setRepeatMode(Animation.REVERSE);

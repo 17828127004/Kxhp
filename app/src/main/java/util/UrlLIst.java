@@ -14,7 +14,7 @@ public class UrlLIst {
     public static final String FOUND_INDEX="/found/index";//发现首页热推
     public static final String FOUND_HOT="/found/hot";//发现热榜
     public static final String FOUND_SHOP_ACTIVITY="/found/shop_activity";//发现推荐
-    public static final String INDEX_BUY_GOODS="/index/buy_goods";//积分商城
+//    public static final String INDEX_BUY_GOODS="/index/buy_goods";//积分商城
     public static final String FOUND_SP_OFFER="/found/sp_offer";//发现首页特价
     public static final String FOUND_ALL_USED="/found/all_used";//发现首页都在用
     public static final String FOUND_CHECK_VIP="/found/check_vip";//判断vip
@@ -25,8 +25,10 @@ public class UrlLIst {
     public static final String INDEX_STAR="/index/star";//星级评价
     public static final String INDEX_STAR_SET="/index/star_set";//评价提交
     public static final String INDEX_MESSAGE="/index/message";//消息中心
-    public static final String INDEX_PAY="/index/pay";//确认支付
     public static final String INDEX_ASK="/index/ask";//你问我答首页
+    public static final String INDEX_GOODS="/index/goods";//积分商城
+    public static final String INDEX_BUY_GOODS="/index/buy_goods";//兑换详情页
+    public static final String INDEX_ORDER="/index/order";//兑换列表
     public static final String INDEX_PRO_ASK="/index/pro_ask";//提问
     public static final String INDEX_MYANSWER="/index/myanswer";//我的回答
     public static final String INDEX_MYASK="/index/myask";//我的提问

@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import com.kxhl.R;
 
+import util.Config;
 import util.TitleUtil;
 
 /**
@@ -25,6 +26,7 @@ public class LineServiceActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numstore);
+        Config.setTranslucent(this);
     }
 
     @Override

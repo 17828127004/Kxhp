@@ -37,9 +37,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Light.NoTitleBar">
+        <!--b61829b7832d4e43cdbd0660cbc6646d-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="b61829b7832d4e43cdbd0660cbc6646d"/>
+            android:value="9e4bce319ceb88bb7411c50d5c04a999"/>
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"

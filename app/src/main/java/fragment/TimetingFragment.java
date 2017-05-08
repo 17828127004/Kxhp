@@ -129,6 +129,7 @@ public class TimetingFragment extends Fragment {
             Toast.makeText(getActivity(), "网络错误！", Toast.LENGTH_SHORT).show();
         }
         getLocation();
+
     }
     @Override
     public void onDestroy() {
@@ -317,6 +318,7 @@ public class TimetingFragment extends Fragment {
             }
         };
         mLocationClient.setLocationListener(mLocationListener);
+
     }
 
 
@@ -396,6 +398,7 @@ public class TimetingFragment extends Fragment {
         mVp.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager(), fragments));
         mVp.setOnPageChangeListener(new MyOnPageListener());
         mVp.setCurrentItem(0);
+        dialog.dismiss();
     }
 
 

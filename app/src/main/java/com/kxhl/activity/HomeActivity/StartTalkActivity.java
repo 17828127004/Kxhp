@@ -64,6 +64,7 @@ public class StartTalkActivity extends Activity implements View.OnClickListener 
                         startActivity(new Intent(StartTalkActivity.this, TalkActivity.class));
                     }
                 });
+        Config.setTranslucent(this);
         initView();
         mLists = new ArrayList<>();
     }

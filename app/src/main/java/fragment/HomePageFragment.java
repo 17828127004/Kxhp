@@ -1,7 +1,11 @@
 package fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -48,6 +54,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapter.HomeStoreAdapter;
 import bean.UPMarqueeViewData;
 import util.Config;
 import util.KxhlRestClient;
@@ -57,6 +64,7 @@ import util.UPMarqueeView;
 import util.UrlLIst;
 import view.CircleImageView;
 import view.LoadingDialog;
+import view.MyGridView;
 import view.MyImg;
 
 /**
@@ -72,6 +80,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private View layoutView;
     private WebView wv_home;
     private UPMarqueeView upview1;
+    private MyGridView mGV;
 
     private LoadingDialog dialog;
     private ScrollView mSv;
@@ -87,10 +96,13 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     // 显示轮播图片
     private XBanner mBannerNet;
    private List<UPMarqueeViewData> data ;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         layoutView = inflater.inflate(R.layout.fragment_homepage, container, false);
         new TitleUtil(layoutView).setTitleName("首页");
+        Config.setTranslucent(getActivity());
         dialog = new LoadingDialog(getActivity());
         data = new ArrayList<UPMarqueeViewData>();
         dialog.show();
@@ -103,7 +115,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         initParam();
         getBanner();
-        getWeb();
+//        getWeb();
         getPhoto();
         getVip((String) SaveData.get(getActivity(), Config.USER_PHONE, ""));
     }
@@ -138,6 +150,8 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         iv_home_vr2 = (MyImg) layoutView.findViewById(R.id.iv_home_vr2);
         iv_home_vr3 = (MyImg) layoutView.findViewById(R.id.iv_home_vr3);
         mBannerNet = (XBanner) layoutView.findViewById(R.id.banner);
+        mGV=(MyGridView)layoutView.findViewById(R.id.home_gv);
+        mGV.setAdapter(new HomeStoreAdapter(getActivity()));
         iv_home_vr.setColor(0x38000000);
         iv_home_vr1.setColor(0x38000000);
         iv_home_vr2.setColor(0x38000000);
@@ -151,6 +165,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         iv_home_vr1.setOnClickListener(this);
         iv_home_vr2.setOnClickListener(this);
         iv_home_vr3.setOnClickListener(this);
+
     }
 
 
@@ -259,6 +274,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             });
             ll_photo.addView(view);
         }
+        dialog.dismiss();
     }
 
 

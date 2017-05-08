@@ -58,6 +58,7 @@ public class RegisterInfoActivity extends Activity {
                         finish();
                     }
                 });
+        Config.setTranslucent(this);
         Intent i = getIntent();
         mPhone = i.getStringExtra("phone");
         initView();
