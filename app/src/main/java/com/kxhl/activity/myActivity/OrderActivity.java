@@ -2,6 +2,8 @@ package com.kxhl.activity.myActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +24,13 @@ import util.KxhlRestClient;
 import util.SaveData;
 import util.UrlLIst;
 
-public class OrderActivity extends Activity {
+public class OrderActivity extends Activity implements View.OnClickListener {
     private TextView tv_title;
     private String userId;
     private XRefreshView xRefreshView;
     private OrderAdapter orderAdapter;
     private ListView listView;
+    private ImageView img_bac;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,8 @@ public class OrderActivity extends Activity {
         tv_title.setText("我的订单");
         listView = (ListView) findViewById(R.id.ord_list);
         xRefreshView = (XRefreshView) findViewById(R.id.order_ref);
-
+        img_bac = (ImageView) findViewById(R.id.titlepg_left_iv);
+        img_bac.setOnClickListener(this);
 
     }
 
@@ -78,5 +82,14 @@ public class OrderActivity extends Activity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.titlepg_left_iv:
+                this.finish();
+                break;
+        }
     }
 }

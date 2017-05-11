@@ -84,7 +84,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
     private View layoutView;
     private WebView wv_home;
     private UPMarqueeView upview1;
-    private GridView mGV;
+    private MyGridView mGV;
 
     private LoadingDialog dialog;
     private ScrollView mSv;
@@ -119,7 +119,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
         super.onActivityCreated(savedInstanceState);
         initParam();
         getBanner();
-//        getWeb();
         getPhoto();
         getVip((String) SaveData.get(getActivity(), Config.USER_PHONE, ""));
     }
@@ -127,7 +126,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onResume() {
         super.onResume();
-        //mSv.smoothScrollTo(0, 20);
+        mSv.smoothScrollTo(0, 20);
         mBannerNet.startAutoPlay();
         if (mWebINdex.equals("1")) {
             wv_home.reload();
@@ -155,7 +154,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
         iv_home_vr2 = (MyImg) layoutView.findViewById(R.id.iv_home_vr2);
         iv_home_vr3 = (MyImg) layoutView.findViewById(R.id.iv_home_vr3);
         mBannerNet = (XBanner) layoutView.findViewById(R.id.banner);
-        mGV = (GridView) layoutView.findViewById(R.id.home_gv);
+        mGV = (MyGridView) layoutView.findViewById(R.id.home_gv);
         mGV.setOnItemClickListener(this);
 
         iv_home_vr.setColor(0x38000000);
@@ -249,7 +248,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
             mPhotoPath.add(i, object.getString("path"));
             mPhotoPic.add(i, (String) object.getJSONArray("pic").get(0));
         }
-        Log.i("dssddsfs", mPhotoPic.toString());
         for (int j = 0; j < mPhotoName.size(); j++) {
             View view = mInflater.inflate(R.layout.item_home_photo, null);
             MyImg imageView = (MyImg) view.findViewById(R.id.item_iv_home);
@@ -283,43 +281,43 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
     }
 
 
-    public void getWeb() {
-        WebSettings webSettings = wv_home.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setBuiltInZoomControls(true);// 设置支持缩放
-        webSettings.setSupportZoom(false);// 不支持缩放
-        webSettings.setUseWideViewPort(false);// 将图片调整到适合webview大小
-        webSettings.setLoadWithOverviewMode(true);// 缩放至屏幕的大小
-        wv_home.loadUrl("http://www.chaojimatou.com/mobile/goods_cat.php?c_id=1731&nohead=1");
-
-        wv_home.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress == 100) {
-                    dialog.dismiss();
-                }
-                super.onProgressChanged(view, newProgress);
-            }
-        });
-
-        wv_home.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("url", url);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                return true;
-            }
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-                mWebINdex = "1";
-            }
-        });
-    }
+//    public void getWeb() {
+//        WebSettings webSettings = wv_home.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//        webSettings.setBuiltInZoomControls(true);// 设置支持缩放
+//        webSettings.setSupportZoom(false);// 不支持缩放
+//        webSettings.setUseWideViewPort(false);// 将图片调整到适合webview大小
+//        webSettings.setLoadWithOverviewMode(true);// 缩放至屏幕的大小
+//        wv_home.loadUrl("http://www.chaojimatou.com/mobile/goods_cat.php?c_id=1731&nohead=1");
+//
+//        wv_home.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public void onProgressChanged(WebView view, int newProgress) {
+//                if (newProgress == 100) {
+//                    dialog.dismiss();
+//                }
+//                super.onProgressChanged(view, newProgress);
+//            }
+//        });
+//
+//        wv_home.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("url", url);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+//                return true;
+//            }
+//
+//            @Override
+//            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+//                super.onReceivedError(view, request, error);
+//                mWebINdex = "1";
+//            }
+//        });
+//    }
 
     /**
      * 初始化界面程序
@@ -332,7 +330,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
         upview1.setOnItemClickListener(new UPMarqueeView.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Log.e("msggggg>>>>", "你点击了第几个items:" + position);
                 Intent i = new Intent(getActivity(), NewsTwoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("newTwo", data.get(position).getUrl());
@@ -473,6 +470,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         if (statusCode == 200) {
+                            Log.e("msg>>>>>>>>",response.toString());
                             ProductBean bean = GsonUtils.JsonClazz(response.toString(), ProductBean.class);
                             if (bean.getGoods() != null) {
                                 goodsBeen = new ArrayList<ProductBean.GoodsBean>();

@@ -3,19 +3,16 @@
     android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:background="@color/bg_selector"
+    android:background="@drawable/shape_corner_up"
     >
     <ImageView
         android:id="@+id/item_iv_find1"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-
-        android:background="@drawable/shape_corner_up"
         android:src="@drawable/home_jita"/>
     <RelativeLayout
         android:layout_below="@+id/item_iv_find1"
         android:layout_width="wrap_content"
-        android:background="@drawable/shape_corner_down"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/item_tv_find_name1"

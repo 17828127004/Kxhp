@@ -296,14 +296,14 @@
                     android:background="@color/bg_selector"
                     android:visibility="gone" />
 
-                <GridView
+                <view.MyGridView
                     android:id="@+id/home_gv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/bg_selector"
-                    android:horizontalSpacing="1dp"
+                    android:horizontalSpacing="2dp"
                     android:numColumns="2"
-                    android:verticalSpacing="3dp"></GridView>
+                    android:verticalSpacing="3dp"></view.MyGridView>
             </RelativeLayout>
 
         </LinearLayout>

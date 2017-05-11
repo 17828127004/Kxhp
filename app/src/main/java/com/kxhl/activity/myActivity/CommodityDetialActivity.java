@@ -13,6 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,9 @@ import util.Config;
 import util.KxhlRestClient;
 import util.SaveData;
 import util.UrlLIst;
+import view.LoadingDialog;
+
+import static com.kxhl.R.drawable.happy_mine_back;
 
 public class CommodityDetialActivity extends Activity implements View.OnClickListener {
     private String comdId;
@@ -42,6 +46,8 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
     private String webUrl;
     private NiftyDialogBuilder dialogBuilder;
     private String uid;
+    private ImageView img_back;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +64,14 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
         tv_title = (TextView) findViewById(R.id.titlepg_between_tv);
         tv_dh = (TextView) findViewById(R.id.titlepg_right_tv);
         tv_title.setText("商品详情");
-        tv_dh.setText("兑换");
+//        tv_dh.setText("兑换");
         tv_dh.setGravity(Gravity.CENTER);
         tv_dh.setOnClickListener(this);
+        button = (Button) findViewById(R.id.comd_dh);
+        button.setOnClickListener(this);
+        img_back = (ImageView) findViewById(R.id.titlepg_left_iv);
+        img_back.setImageResource(R.drawable.happy_mine_back);
+        img_back.setOnClickListener(this);
 
     }
 
@@ -77,6 +88,7 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
     }
 
     private void initView() {
+        loadingDialog = new LoadingDialog(CommodityDetialActivity.this);
         WebSettings webSettings = wv_store.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(true);// 设置支持缩放
@@ -110,7 +122,7 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.titlepg_right_tv:
+            case R.id.comd_dh:
                 if (!uid.equals("")) {
                     dialogBuilder.withTitle("是否兑换")
                             .withTitleColor("#FFFFFF")
@@ -142,6 +154,12 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
                     startActivity(intent);
                 }
                 break;
+            case R.id.titlepg_left_iv:
+                if (dialogBuilder != null) {
+                    dialogBuilder.dismiss();
+                }
+                this.finish();
+                break;
         }
 
     }
@@ -156,6 +174,7 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
     }
 
     private void buyProduct() {
+        loadingDialog.show();
         RequestParams params = new RequestParams();
         params.put("gid", comdId);
         params.put("uid", uid);
@@ -163,6 +182,7 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 if (statusCode == 200) {
+                    loadingDialog.dismiss();
                     Toast.makeText(CommodityDetialActivity.this, "兑换成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(CommodityDetialActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
@@ -172,6 +192,7 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                loadingDialog.dismiss();
                 Toast.makeText(CommodityDetialActivity.this, "兑换失败", Toast.LENGTH_SHORT).show();
                 super.onFailure(statusCode, headers, responseString, throwable);
             }

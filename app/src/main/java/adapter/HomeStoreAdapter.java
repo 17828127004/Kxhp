@@ -62,12 +62,11 @@ public class HomeStoreAdapter extends BaseAdapter {
             viewholder = (Viewholder) convertView.getTag();
         }
         Glide.with(context).load(goodsBeen.get(position).getImg())
-                .bitmapTransform(new RoundedCornersTransformation(context, 60, 0, RoundedCornersTransformation.CornerType.TOP))
+                .asBitmap()
                 .into(viewholder.imageView);
         viewholder.tv_name.setText(goodsBeen.get(position).getName());
         viewholder.tv_jf.setText("积分：" + goodsBeen.get(position).getPrice());
         viewholder.img_dh.setText("库存：" + goodsBeen.get(position).getNum());
-
         return convertView;
     }
 

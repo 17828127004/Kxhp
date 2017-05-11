@@ -171,7 +171,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     startActivity(i);
                 }
                 break;
-            case R.id.my_order:
+            case R.id.my_order://订单列表
                 if (userId.equals("")) {
                     i.setClass(getActivity(), LoginActivity.class);
                     startActivity(i);
