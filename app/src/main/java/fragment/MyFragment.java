@@ -23,6 +23,7 @@ import com.kxhl.activity.HomeActivity.GrowUpPhotoActivity;
 import com.kxhl.activity.LoginActivity;
 import com.kxhl.activity.findActivity.NumStoreActivity;
 import com.kxhl.activity.myActivity.MySettingActivity;
+import com.kxhl.activity.myActivity.OrderActivity;
 import com.kxhl.activity.myActivity.ServiceActivity;
 import com.kxhl.activity.myActivity.TimetingActivity;
 import com.kxhl.activity.myActivity.VipActivity;
@@ -47,7 +48,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private View layoutView;
     private CircleImageView cImage;
     private RelativeLayout rl_heart;//头像
-    private RelativeLayout rl_my_timeting, rl_record,  rl_store,  rl_service_center,rl_welcome;
+    private RelativeLayout rl_my_timeting, rl_record, rl_store, rl_service_center, rl_welcome, rl_myorder;
     private TextView tv_name;
     private ImageView iv_vip;
     private TextView tv_card;//会员卡
@@ -95,6 +96,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         tv_card = (TextView) layoutView.findViewById(R.id.tv_card);
         tv_coupon = (TextView) layoutView.findViewById(R.id.tv_coupon);
         tv_integral = (TextView) layoutView.findViewById(R.id.tv_integral);
+        rl_myorder = (RelativeLayout) layoutView.findViewById(R.id.my_order);
 
     }
 
@@ -109,38 +111,39 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         rl_store.setOnClickListener(this);
         tv_card.setOnClickListener(this);
         rl_welcome.setOnClickListener(this);
+        rl_myorder.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent i = new Intent();
-        String userId= (String) SaveData.get(getActivity(),Config.USERID,"");
+        String userId = (String) SaveData.get(getActivity(), Config.USERID, "");
         switch (v.getId()) {
             case R.id.rl_heart://基本信息
-                if(userId.equals("")){
+                if (userId.equals("")) {
                     i.setClass(getActivity(), LoginActivity.class);
-                }else{
+                } else {
                     i.setClass(getActivity(), MySettingActivity.class);
                     i.putExtra("head", head);
                 }
                 startActivity(i);
                 break;
             case R.id.rl_my_timeting://我的预约
-                if(userId.equals("")){
+                if (userId.equals("")) {
                     i.setClass(getActivity(), LoginActivity.class);
-                }else {
+                } else {
                     i.setClass(getActivity(), TimetingActivity.class);
                 }
                 startActivity(i);
 
                 break;
             case R.id.rl_record://成长相册
-                if(userId.equals("")){
+                if (userId.equals("")) {
                     i.setClass(getActivity(), LoginActivity.class);
-                }else {
+                } else {
                     i.setClass(getActivity(), GrowUpPhotoActivity.class);
                 }
-                    startActivity(i);
+                startActivity(i);
 
 
                 break;
@@ -149,9 +152,9 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 startActivity(i);
                 break;
             case R.id.rl_store://积分商城
-                if(userId.equals("")){
+                if (userId.equals("")) {
                     i.setClass(getActivity(), LoginActivity.class);
-                }else {
+                } else {
                     i.setClass(getActivity(), NumStoreActivity.class);
                 }
                 startActivity(i);
@@ -167,6 +170,16 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     i.setClass(getActivity(), VipActivity.class);
                     startActivity(i);
                 }
+                break;
+            case R.id.my_order:
+                if (userId.equals("")) {
+                    i.setClass(getActivity(), LoginActivity.class);
+                    startActivity(i);
+                } else {
+                    i.setClass(getActivity(), OrderActivity.class);
+                    startActivity(i);
+                }
+
                 break;
         }
     }

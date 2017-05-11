@@ -21,6 +21,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -42,6 +43,7 @@ import com.kxhl.activity.HomeActivity.SeeVRActivity;
 import com.kxhl.activity.HomeActivity.TalkActivity;
 import com.kxhl.activity.HomeActivity.WebViewActivity;
 import com.kxhl.activity.LoginActivity;
+import com.kxhl.activity.myActivity.CommodityDetialActivity;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.stx.xhb.xbanner.XBanner;
@@ -55,8 +57,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.HomeStoreAdapter;
+import bean.ProductBean;
 import bean.UPMarqueeViewData;
 import util.Config;
+import util.GsonUtils;
 import util.KxhlRestClient;
 import util.SaveData;
 import util.TitleUtil;
@@ -70,7 +74,7 @@ import view.MyImg;
 /**
  * Created by Administrator on 2017/1/6.
  */
-public class HomePageFragment extends Fragment implements View.OnClickListener {
+public class HomePageFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     //    private LinearLayout ll_home
     private ImageView iv_homeTimeting;//在线预约
     private ImageView iv_homeTalk;//星级评价
@@ -80,7 +84,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private View layoutView;
     private WebView wv_home;
     private UPMarqueeView upview1;
-    private MyGridView mGV;
+    private GridView mGV;
 
     private LoadingDialog dialog;
     private ScrollView mSv;
@@ -95,7 +99,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private LayoutInflater mInflater;
     // 显示轮播图片
     private XBanner mBannerNet;
-   private List<UPMarqueeViewData> data ;
+    private List<UPMarqueeViewData> data;
 
 
     @Override
@@ -123,13 +127,14 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        mSv.smoothScrollTo(0, 20);
+        //mSv.smoothScrollTo(0, 20);
         mBannerNet.startAutoPlay();
         if (mWebINdex.equals("1")) {
             wv_home.reload();
             mWebINdex = "0";
         }
         getNews();
+        getData();
     }
 
     /**
@@ -150,8 +155,9 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         iv_home_vr2 = (MyImg) layoutView.findViewById(R.id.iv_home_vr2);
         iv_home_vr3 = (MyImg) layoutView.findViewById(R.id.iv_home_vr3);
         mBannerNet = (XBanner) layoutView.findViewById(R.id.banner);
-        mGV=(MyGridView)layoutView.findViewById(R.id.home_gv);
-        mGV.setAdapter(new HomeStoreAdapter(getActivity()));
+        mGV = (GridView) layoutView.findViewById(R.id.home_gv);
+        mGV.setOnItemClickListener(this);
+
         iv_home_vr.setColor(0x38000000);
         iv_home_vr1.setColor(0x38000000);
         iv_home_vr2.setColor(0x38000000);
@@ -217,7 +223,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                     Log.i("获取首页相册数据", response.toString());
                     try {
                         getJson(response.getJSONArray("grow_show"));
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -300,8 +305,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         wv_home.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("url", url);
@@ -347,7 +350,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         if (data.size() == 0) {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject object = array.getJSONObject(i);
-                data.add(new UPMarqueeViewData("头条",object.getString("title"),object.getString("url")));
+                data.add(new UPMarqueeViewData("头条", object.getString("title"), object.getString("url")));
             }
             initView();
         }
@@ -462,5 +465,46 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         super.onDestroy();
     }
 
+    private List<ProductBean.GoodsBean> goodsBeen;
+
+    private void getData() {
+        RequestParams params = new RequestParams();
+        KxhlRestClient.post(UrlLIst.PRODUCT_LIST, params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        if (statusCode == 200) {
+                            ProductBean bean = GsonUtils.JsonClazz(response.toString(), ProductBean.class);
+                            if (bean.getGoods() != null) {
+                                goodsBeen = new ArrayList<ProductBean.GoodsBean>();
+                                goodsBeen.addAll(bean.getGoods());
+                                mGV.setAdapter(new HomeStoreAdapter(getActivity(), goodsBeen));
+
+                            }
+
+
+                        } else {
+                            Toast.makeText(getContext(), "请求失败", Toast.LENGTH_SHORT).show();
+                        }
+                        super.onSuccess(statusCode, headers, response);
+
+                    }
+                }
+
+        );
+    }
+
+    private Intent intent = null;
+    private String comdId;
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        comdId = goodsBeen.get(position).getId();
+        intent = new Intent(getActivity(), CommodityDetialActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("comdId", comdId);
+        bundle.putString("webUrl", goodsBeen.get(position).getUrl());
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
 }

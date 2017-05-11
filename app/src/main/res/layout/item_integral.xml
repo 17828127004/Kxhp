@@ -3,43 +3,55 @@
     android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:background="@color/white"
+    android:background="@color/bg_selector"
     >
     <ImageView
         android:id="@+id/item_iv_find1"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:scaleType="centerCrop"
+
+        android:background="@drawable/shape_corner_up"
         android:src="@drawable/home_jita"/>
-    <TextView
-        android:id="@+id/item_tv_find_name1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="儿童仿真吉他"
-        android:textSize="14sp"
+    <RelativeLayout
         android:layout_below="@+id/item_iv_find1"
-        android:layout_alignParentLeft="true"
-        android:paddingLeft="5dp"
-        android:textColor="@color/tixt"
-       />
-    <TextView
-        android:id="@+id/item_tv_find_about"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="389积分"
-        android:textSize="12sp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textColor="@color/red"
-        android:layout_below="@id/item_tv_find_name1"
-        android:layout_centerHorizontal="true"
-        />
-    <ImageView
-        android:layout_width="34dp"
-        android:layout_height="18dp"
-        android:src="@drawable/go_convert"
-        android:layout_below="@id/item_tv_find_name1"
-        android:layout_alignParentRight="true"
-        android:paddingRight="10dp"
-        android:paddingBottom="3dp"/>
+        android:background="@drawable/shape_corner_down"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/item_tv_find_name1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="儿童仿真吉他"
+            android:textSize="14sp"
+
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="5dp"
+            android:textColor="@color/tixt"
+            />
+        <TextView
+            android:id="@+id/item_tv_find_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="389积分"
+            android:textSize="12sp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/red"
+            android:layout_below="@id/item_tv_find_name1"
+            android:layout_marginLeft="5sp"
+            />
+        <TextView
+            android:id="@+id/img_dh"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_below="@id/item_tv_find_name1"
+            android:text="库存：100"
+            android:textSize="12sp"
+            android:paddingRight="5sp"
+            android:textColor="@color/red"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="3dp"/>
+    </RelativeLayout>
+
+
 </RelativeLayout>

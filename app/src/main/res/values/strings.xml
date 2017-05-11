@@ -40,5 +40,6 @@
     <string name="camera_cancel">取消</string>
     <string name="no_photo">相册没有图片</string>
     <string name="send">发送</string>
-<string name="save">保存</string>
+    <string name="save">保存</string>
+    <string name="cmddetial">商品详情</string>
 </resources>

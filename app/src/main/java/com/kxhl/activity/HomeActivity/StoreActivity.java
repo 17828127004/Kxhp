@@ -63,7 +63,6 @@ public class StoreActivity extends Activity {
     private TextView tv_storeMsg_address;
     private ImageView iv_storeMsg_start1, iv_storeMsg_start2, iv_storeMsg_start3, iv_storeMsg_start4, iv_storeMsg_start5;
     private TextView tv_storeMsg_time;
-    private ImageView iv_storeMsg_phone;
     private ImageView iv_storeMsg_back;
     private Button btn_storeMsg_time;
     private LoadingDialog dialog;
@@ -135,7 +134,7 @@ public class StoreActivity extends Activity {
         iv_storeMsg_start3 = (ImageView) findViewById(R.id.iv_storeMsg_start3);
         iv_storeMsg_start4 = (ImageView) findViewById(R.id.iv_storeMsg_start4);
         iv_storeMsg_start5 = (ImageView) findViewById(R.id.iv_storeMsg_start5);
-        iv_storeMsg_phone = (ImageView) findViewById(R.id.iv_storeMsg_phone);
+       // iv_storeMsg_phone = (ImageView) findViewById(R.id.iv_storeMsg_phone);
         iv_storeMsg_back = (ImageView) findViewById(R.id.iv_storeMsg_back);
         btn_storeMsg_time = (Button) findViewById(R.id.btn_storeMsg_time);
         mTagCloudLayout = (FluidLayout) findViewById(R.id.tcl);
@@ -245,16 +244,16 @@ public class StoreActivity extends Activity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    iv_storeMsg_phone.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            try {
-                                call(response.getString("phone"));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
+//                    iv_storeMsg_phone.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            try {
+//                                call(response.getString("phone"));
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    });
                 }
                 super.onSuccess(statusCode, headers, response);
             }

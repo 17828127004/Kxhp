@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kxhl">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -12,48 +13,54 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--获取位置信息-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 获取位置信息 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-<!--高德定位权限-->
-    <!--用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <!--用于访问GPS定位-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <!--用于获取运营商信息，用于支持提供运营商信息相关的接口-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-    <!--用于读取手机当前的状态-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 高德定位权限 -->
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/hh"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Light.NoTitleBar">
-        <!--b61829b7832d4e43cdbd0660cbc6646d-->
+
+        <!-- b61829b7832d4e43cdbd0660cbc6646d -->
+        <!-- 9e4bce319ceb88bb7411c50d5c04a999 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="9e4bce319ceb88bb7411c50d5c04a999"/>
+            android:value="b61829b7832d4e43cdbd0660cbc6646d" />
+
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            android:screenOrientation="portrait">
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
         </activity>
-        <activity android:name=".activity.WelcomeActivity"
+        <activity
+            android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBlackTheme">
             <intent-filter>
@@ -65,132 +72,153 @@
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
-        <service android:name="com.amap.api.location.APSService"></service>
+            android:screenOrientation="portrait" />
+
+        <service android:name="com.amap.api.location.APSService" />
+
         <activity
             android:name=".activity.RegisterActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RegisterInfoActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.myActivity.MySettingActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.myActivity.TimetingActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.myActivity.SetPasswordActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.TalkActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.AnswersActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.MsgActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.LineTimeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.myActivity.ServiceActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.QuizActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.myActivity.SetNameActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.StartTalkActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.MsgTwoActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.GrowUpPhotoActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.MyAnswersActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.MyQuizActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.StoreActivity"
-            android:theme="@style/ImageTranslucentTheme"
             android:launchMode="singleTask"
-
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageTranslucentTheme" />
         <activity
             android:name=".activity.myActivity.VipActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.findActivity.StorePushActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.findActivity.NumStoreActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HomeActivity.UploadActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.findActivity.RanKingActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.foamtrace.photopicker.PhotoPickerActivity"
-            android:theme="@style/PhotoPickerTheme"
-            android:configChanges="orientation|screenSize"/>
-
-        <activity android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
-            android:theme="@style/PhotoPickerTheme"/>
-        <activity android:name=".activity.HomeActivity.EditActivity"
-            android:theme="@style/dialog_translucent"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity
+            android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity
+            android:name=".activity.HomeActivity.EditActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.findActivity.ProjectActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/dialog_translucent" />
+        <activity
+            android:name=".activity.findActivity.ProjectActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.HomeActivity.WebViewActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.HomeActivity.SeePhotoActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.findActivity.HotActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.findActivity.DayActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.findActivity.AllUserActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.HomeActivity.NewsActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.HomeActivity.NewsTwoActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.FindPassWordActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.HomeActivity.SeePhotoPushActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeActivity.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeActivity.SeePhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.findActivity.HotActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.findActivity.DayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.findActivity.AllUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeActivity.NewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeActivity.NewsTwoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FindPassWordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeActivity.SeePhotoPushActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeActivity.SeeVRActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.myActivity.LineServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.myActivity.CommodityDetialActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"></activity>
-        <activity android:name=".activity.HomeActivity.SeeVRActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name=".activity.myActivity.OrderActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"></activity>
-        <activity android:name=".activity.myActivity.LineServiceActivity"
-            android:screenOrientation="portrait"></activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
     </application>
 
 </manifest>

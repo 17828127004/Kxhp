@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_commodity_detial"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kxhl.activity.myActivity.CommodityDetialActivity">
+
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/title_util_layout" />
+
+    <ProgressBar
+        android:id="@+id/pb_store"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5px"
+        android:layout_below="@id/title_bar" />
+
+    <!--
+    -->
+
+
+    <WebView
+        android:id="@+id/wv_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pb_store"></WebView>
+
+
+    <!--<Button-->
+        <!--android:id="@+id/comd_dh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_below="@id/wv_store"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginLeft="40dp"-->
+        <!--android:layout_marginRight="40dp"-->
+        <!--android:background="@drawable/yuyue_store"-->
+        <!--android:text="立即兑换"-->
+        <!--android:textColor="@color/bg_white"-->
+        <!--android:textSize="16sp" />-->
+
+
+</RelativeLayout>

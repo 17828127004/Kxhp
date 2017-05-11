@@ -47,4 +47,7 @@ public class UrlLIst {
     public static final String MINE_GROW_TEXT="/mine/grow_text";//上传内容
     public static final String MINE_VIP_SHOW="/mine/vip_show";//会员详情
     public static final String MINE_EDIT_INDEX="/mine/edit_index";//我的资料
+    public static final String PRODUCT_LIST="/index/goods";//商品列表
+    public static final String PRODUCT_BUY="/index/buy_goods";//商品兑换
+    public static final String MY_ORDER="/index/order";//我的订单
 }

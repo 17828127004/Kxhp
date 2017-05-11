@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_white"
     android:orientation="vertical">
 
     <include layout="@layout/title_util_layout" />
@@ -11,8 +10,9 @@
     <ScrollView
         android:id="@+id/home_sv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="match_parent"
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,8 +25,7 @@
                 android:layout_height="170dp"
                 app:AutoPlayTime="5000"
                 app:pointNormal="@drawable/dot_normal"
-                app:pointSelect="@drawable/dot_focused"
-                ></com.stx.xhb.xbanner.XBanner>
+                app:pointSelect="@drawable/dot_focused"></com.stx.xhb.xbanner.XBanner>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -211,18 +210,15 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
                 android:paddingLeft="10dp"
-               >
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:id="@+id/ll_home"
                     android:layout_width="wrap_content"
                     android:layout_height="120dp"
                     android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-                </LinearLayout>
+                    android:orientation="horizontal"></LinearLayout>
             </HorizontalScrollView>
 
             <View
@@ -239,15 +235,14 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="120dp"
                     android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <view.MyImg
                         android:id="@+id/iv_home_vr"
@@ -260,25 +255,25 @@
                         android:layout_width="200dp"
                         android:layout_height="120dp"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/home_vro"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_vro" />
 
                     <view.MyImg
                         android:id="@+id/iv_home_vr2"
                         android:layout_width="210dp"
                         android:layout_height="120dp"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/home_vrt"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/home_vrt" />
 
                     <view.MyImg
                         android:id="@+id/iv_home_vr3"
                         android:layout_width="215dp"
                         android:layout_height="120dp"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/home_vrs"
+                        android:layout_marginRight="10dp"
                         android:scaleType="centerCrop"
-                        android:layout_marginRight="10dp"/>
+                        android:src="@drawable/home_vrs" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -289,6 +284,7 @@
                 android:background="@color/bg_selector" />-->
 
             <RelativeLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/bg_selector">
@@ -297,15 +293,17 @@
                     android:id="@+id/wv_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-                <view.MyGridView
+                    android:background="@color/bg_selector"
+                    android:visibility="gone" />
+
+                <GridView
                     android:id="@+id/home_gv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:numColumns="2"
-                    android:verticalSpacing="3dp"
+                    android:background="@color/bg_selector"
                     android:horizontalSpacing="1dp"
-                    ></view.MyGridView>
+                    android:numColumns="2"
+                    android:verticalSpacing="3dp"></GridView>
             </RelativeLayout>
 
         </LinearLayout>

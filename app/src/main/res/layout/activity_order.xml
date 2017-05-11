@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kxhl.activity.myActivity.OrderActivity">
+
+    <include
+        android:id="@+id/title_bar_order"
+        layout="@layout/title_util_layout" />
+
+   <com.andview.refreshview.XRefreshView
+       android:layout_below="@id/title_bar_order"
+       xmlns:xrefreshview="http://schemas.android.com/apk/res-auto"
+       android:id="@+id/order_ref"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="#fff"
+       android:orientation="vertical"
+       xrefreshview:isHeightMatchParent="true"
+       xrefreshview:isWidthMatchParent="true"
+       >
+       <ListView
+           android:id="@+id/ord_list"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"></ListView>
+
+   </com.andview.refreshview.XRefreshView>
+
+</RelativeLayout>
