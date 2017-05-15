@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_corner_dialog"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/lin"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="50sp"
+        android:text="msg"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:id="@+id/textView" />
+<ImageView
+    android:background="@color/view"
+    android:layout_width="match_parent"
+    android:layout_height="1sp" />
+    <Button
+        android:id="@+id/sure"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_corner_dialog"
+        android:textSize="16sp"
+        android:textColor="@color/blue_text"
+        android:text="确定"
+        />
+
+</LinearLayout>

@@ -277,33 +277,31 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <!--<View
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="3dp"
-                android:background="@color/bg_selector" />-->
+                android:layout_height="5sp"
+                android:background="@color/bg_selector" />
 
             <RelativeLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/bg_selector">
-
-                <WebView
-                    android:id="@+id/wv_home"
+                <ImageView
+                    android:id="@+id/img"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/bg_selector"
-                    android:visibility="gone" />
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/home_title1"/>
 
                 <view.MyGridView
+                    android:layout_below="@id/img"
                     android:id="@+id/home_gv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/bg_selector"
-                    android:horizontalSpacing="2dp"
+                    android:horizontalSpacing="5dp"
                     android:numColumns="2"
-                    android:verticalSpacing="3dp"></view.MyGridView>
+                    android:verticalSpacing="5dp"></view.MyGridView>
             </RelativeLayout>
 
         </LinearLayout>

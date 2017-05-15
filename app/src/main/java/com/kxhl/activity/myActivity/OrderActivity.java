@@ -48,12 +48,12 @@ public class OrderActivity extends Activity implements View.OnClickListener {
 
     private void init() {
         tv_title = (TextView) findViewById(R.id.titlepg_between_tv);
-        tv_title.setText("我的订单");
+        tv_title.setText("我的兑换");
         listView = (ListView) findViewById(R.id.ord_list);
         xRefreshView = (XRefreshView) findViewById(R.id.order_ref);
         img_bac = (ImageView) findViewById(R.id.titlepg_left_iv);
+        img_bac.setImageResource(R.drawable.happy_mine_back);
         img_bac.setOnClickListener(this);
-
     }
 
     private void getData() {

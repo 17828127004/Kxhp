@@ -399,7 +399,7 @@ public class TimeUtil {
 
     public static String getMilliToDate(String time) {
         String re_time = null;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd/ HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long lcc_time = Long.valueOf(time);
         re_time = format.format(new Date(lcc_time * 1000L));
         return re_time;

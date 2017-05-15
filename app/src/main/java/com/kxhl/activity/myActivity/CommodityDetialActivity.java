@@ -34,6 +34,7 @@ import util.KxhlRestClient;
 import util.SaveData;
 import util.UrlLIst;
 import view.LoadingDialog;
+import view.MyDialog;
 
 import static com.kxhl.R.drawable.happy_mine_back;
 
@@ -44,16 +45,18 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
     private WebView wv_store;
     private ProgressBar pb;
     private String webUrl;
-    private NiftyDialogBuilder dialogBuilder;
+    // private NiftyDialogBuilder dialogBuilder;
     private String uid;
     private ImageView img_back;
     private LoadingDialog loadingDialog;
+    private MyDialog myDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commodity_detial);
-        dialogBuilder = NiftyDialogBuilder.getInstance(this);
+        //dialogBuilder = NiftyDialogBuilder.getInstance(this);
+        myDialog = MyDialog.getInstance(this);
         Config.setTranslucent(this);
         Bundle bundle = this.getIntent().getExtras();
         uid = (String) SaveData.get(CommodityDetialActivity.this, Config.USERID, "");
@@ -124,40 +127,39 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.comd_dh:
                 if (!uid.equals("")) {
-                    dialogBuilder.withTitle("是否兑换")
-                            .withTitleColor("#FFFFFF")
-                            .withDividerColor("#11000000")
-                            .withMessage("点击确定进行兑换.")
-                            .withMessageColor("#000000")
-                            .withDialogColor("#ffffffff")
-                            .withDuration(700)
-                            .withEffect(Effectstype.Newspager)
-                            .withButton1Text("Cancel")
-                            .withButton2Text("Ok")
-                            .isCancelableOnTouchOutside(true)
-                            .setButton1Click(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialogBuilder.dismiss();
-                                }
-                            })
-                            .setButton2Click(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    buyProduct();
-                                    dialogBuilder.dismiss();
-                                }
-                            })
-                            .show();
+                    buyProduct();
+//                    dialogBuilder.withTitle("hahah")
+//                            .withTitleColor("#FFFFFF")
+//                            .withDividerColor("#11000000")
+//                            .withMessage("点击确定进行兑换.")
+//                            .withMessageColor("#000000")
+//                            .withDialogColor("#ffffffff")
+//                            .withDuration(700)
+//                            .withEffect(Effectstype.Newspager)
+//                            .withButton1Text("Cancel")
+//                            .withButton2Text("Ok")
+//                            .isCancelableOnTouchOutside(true)
+//
+//                            .setButton2Click(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    //buyProduct();
+//                                    dialogBuilder.dismiss();
+//                                    wv_store.reload();
+//                                }
+//                            })
+//                            .show();
                 } else {
                     Intent intent = new Intent(CommodityDetialActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
                 break;
             case R.id.titlepg_left_iv:
-                if (dialogBuilder != null) {
-                    dialogBuilder.dismiss();
+                if (myDialog != null) {
+                    myDialog.dismiss();
                 }
+                if (loadingDialog != null)
+                    loadingDialog.dismiss();
                 this.finish();
                 break;
         }
@@ -167,9 +169,11 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dialogBuilder != null) {
-            dialogBuilder.dismiss();
+        if (myDialog != null) {
+            myDialog.dismiss();
         }
+        if (loadingDialog != null)
+            loadingDialog.dismiss();
         this.finish();
     }
 
@@ -183,7 +187,13 @@ public class CommodityDetialActivity extends Activity implements View.OnClickLis
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 if (statusCode == 200) {
                     loadingDialog.dismiss();
-                    Toast.makeText(CommodityDetialActivity.this, "兑换成功", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CommodityDetialActivity.this, "兑换成功", Toast.LENGTH_SHORT).show();
+                    myDialog.withTitle("兑换成功").setButtonClick(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            myDialog.dismiss();
+                        }
+                    }).show();
                 } else {
                     Toast.makeText(CommodityDetialActivity.this, "请求失败", Toast.LENGTH_SHORT).show();
                 }

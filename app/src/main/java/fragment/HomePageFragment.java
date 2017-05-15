@@ -82,7 +82,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
     private ImageView iv_homeMsg;//消息中心
     private ImageView iv_homeAnswer;//你问我答
     private View layoutView;
-    private WebView wv_home;
+//    private WebView wv_home;
     private UPMarqueeView upview1;
     private MyGridView mGV;
 
@@ -129,7 +129,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
         mSv.smoothScrollTo(0, 20);
         mBannerNet.startAutoPlay();
         if (mWebINdex.equals("1")) {
-            wv_home.reload();
+            //wv_home.reload();
             mWebINdex = "0";
         }
         getNews();
@@ -146,7 +146,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener, 
         iv_homePhoto = (ImageView) layoutView.findViewById(R.id.iv_homePhoto);
         iv_homeMsg = (ImageView) layoutView.findViewById(R.id.iv_homeMsg);
         iv_homeAnswer = (ImageView) layoutView.findViewById(R.id.iv_homeAnswer);
-        wv_home = (WebView) layoutView.findViewById(R.id.wv_home);
+       // wv_home = (WebView) layoutView.findViewById(R.id.wv_home);
         mSv = (ScrollView) layoutView.findViewById(R.id.home_sv);
         ll_photo = (LinearLayout) layoutView.findViewById(R.id.ll_home);
         iv_home_vr = (MyImg) layoutView.findViewById(R.id.iv_home_vr);

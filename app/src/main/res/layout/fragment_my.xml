@@ -248,13 +248,13 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginLeft="15dp"
-                    android:src="@drawable/happy_mine_littletree" />
+                    android:src="@drawable/my_order" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="45dp"
-                    android:text="我的订单"
+                    android:text="我的兑换"
                     android:textSize="14sp" />
 
                 <ImageView

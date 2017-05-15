@@ -65,8 +65,8 @@ public class HomeStoreAdapter extends BaseAdapter {
                 .asBitmap()
                 .into(viewholder.imageView);
         viewholder.tv_name.setText(goodsBeen.get(position).getName());
-        viewholder.tv_jf.setText("积分：" + goodsBeen.get(position).getPrice());
-        viewholder.img_dh.setText("库存：" + goodsBeen.get(position).getNum());
+        viewholder.tv_jf.setText( goodsBeen.get(position).getPrice() );
+        viewholder.img_dh.setText( goodsBeen.get(position).getNum());
         return convertView;
     }
 
