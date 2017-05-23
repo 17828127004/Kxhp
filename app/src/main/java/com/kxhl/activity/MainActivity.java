@@ -21,6 +21,8 @@ import fragment.FindFragment;
 import fragment.HomePageFragment;
 import fragment.MyFragment;
 import fragment.TimetingFragment;
+import util.Config;
+import util.SaveData;
 
 import static adapter.FragmentsAdapter.OnRgsExtraCheckedChangedListener;
 
@@ -36,6 +38,8 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String id=JPushInterface.getRegistrationID(this);
+        SaveData.put(this, Config.REGISTRATION_ID,id);
         fragments.add(new HomePageFragment());
         fragments.add(new FindFragment());
         fragments.add(new TimetingFragment());

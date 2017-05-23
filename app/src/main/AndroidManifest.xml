@@ -86,7 +86,7 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="您应用的包名" />
+                <category android:name="com.kxhl" />
             </intent-filter>
         </activity>
 
