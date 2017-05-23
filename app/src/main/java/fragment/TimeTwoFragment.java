@@ -42,11 +42,6 @@ public class TimeTwoFragment extends Fragment {
         this.mDistance=mDistance;
         this.mStart=mStart;
     }
-//public static TimeTwoFragment newInstance(List<String> mNames, List<String> mPaths, List<String> mTimes,
-//                                          List<String> mStoreId, List<String> mDistance, List<String> mStart) {
-//    TimeTwoFragment timeTwoFragment = new TimeTwoFragment();
-//    return timeTwoFragment;
-//}
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,

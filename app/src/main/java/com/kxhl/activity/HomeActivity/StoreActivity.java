@@ -2,25 +2,19 @@ package com.kxhl.activity.HomeActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,8 +25,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.fynn.fluidlayout.FluidLayout;
-
-
 import com.kxhl.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -49,7 +41,6 @@ import util.KxhlRestClient;
 import util.SaveData;
 import util.UrlLIst;
 import view.LoadingDialog;
-import view.MyAnomation;
 
 
 /**
@@ -275,6 +266,7 @@ public class StoreActivity extends Activity {
         params.put("sid", storeId);
         params.put("uid", userId);
         params.put("appointment_time", time);
+        params.put("device_id",SaveData.get(this,Config.REGISTRATION_ID,""));
         KxhlRestClient.post(UrlLIst.APPOINTMENT_APPOINTMENT, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

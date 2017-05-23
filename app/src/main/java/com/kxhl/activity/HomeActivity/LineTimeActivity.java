@@ -1,7 +1,6 @@
 package com.kxhl.activity.HomeActivity;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -38,7 +37,6 @@ import java.util.List;
 import adapter.MyFragmentPagerAdapter;
 import fragment.TimeFiveFragment;
 import fragment.TimeFourFragment;
-import fragment.TimeOneFragment;
 import fragment.TimeThreeFragment;
 import fragment.TimeTwoFragment;
 import util.Config;
@@ -373,7 +371,7 @@ public class LineTimeActivity extends FragmentActivity {
             mDistance.add(i, distance);
         }
         fragments = new ArrayList<>();
-        TimeOneFragment timeOneFragment =new  TimeOneFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
+//        TimeOneFragment timeOneFragment =new  TimeOneFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
         TimeTwoFragment timeTwoFragment = new TimeTwoFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
         TimeThreeFragment timeThreeFragment = new TimeThreeFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
         TimeFourFragment timeFourFragment = new TimeFourFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
@@ -383,7 +381,7 @@ public class LineTimeActivity extends FragmentActivity {
 //        TimeThreeFragment timeThreeFragment = TimeThreeFragment.newInstance(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
 //        TimeFourFragment timeFourFragment = TimeFourFragment.newInstance(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
 //        TimeFiveFragment timeFiveFragment = TimeFiveFragment.newInstance (mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
-        fragments.add(timeOneFragment);
+//        fragments.add(timeOneFragment);
         fragments.add(timeTwoFragment);
         fragments.add(timeThreeFragment);
         fragments.add(timeFourFragment);

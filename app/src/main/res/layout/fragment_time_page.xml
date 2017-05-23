@@ -4,12 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/bg_selector">
-<ListView
-    android:id="@+id/lv_page_timeting"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:dividerHeight="7dp"
-    android:divider="@color/bg_selector"
-    android:background="@color/bg_white"
-    ></ListView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_page_timeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="7dp"
+            android:divider="@color/bg_selector"
+            android:background="@color/bg_white"
+            ></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

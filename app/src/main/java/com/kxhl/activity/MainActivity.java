@@ -16,6 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import adapter.FragmentsAdapter;
+import cn.jpush.android.api.JPushInterface;
 import fragment.FindFragment;
 import fragment.HomePageFragment;
 import fragment.MyFragment;
@@ -30,7 +31,6 @@ public class MainActivity extends FragmentActivity {
     private RadioButton rb_timeting;
     private RadioButton rb_my;
     private List<Fragment> fragments = new ArrayList<Fragment>();
-
     //    private Fragment tab_content;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +95,20 @@ public class MainActivity extends FragmentActivity {
         return false;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
     /**
      * 双击退出函数
      */
@@ -118,4 +132,6 @@ public class MainActivity extends FragmentActivity {
             System.exit(0);
         }
     }
+
+
 }

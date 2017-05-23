@@ -1,7 +1,6 @@
 package fragment;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -28,6 +27,8 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +43,7 @@ import util.SaveData;
 import util.TimeUtil;
 import util.TitleUtil;
 import util.UrlLIst;
+import util.entity.GetTimeting;
 import view.LoadingDialog;
 
 /**
@@ -85,6 +87,7 @@ public class TimetingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         layoutView = inflater.inflate(R.layout.fragment_timeting, container, false);
         new TitleUtil(layoutView).setTitleName("预约");
         resources = getResources();
@@ -131,6 +134,13 @@ public class TimetingFragment extends Fragment {
         getLocation();
 
     }
+    @Subscribe
+    public void onEventMainThread(GetTimeting event){
+        if(event.getId().equals("0")){
+            getLocation();
+        }
+
+    }
     @Override
     public void onDestroy() {
         try{
@@ -138,6 +148,7 @@ public class TimetingFragment extends Fragment {
         }catch (Exception e) {
 
         }
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
     class MyOnClickListener implements View.OnClickListener {
@@ -342,7 +353,7 @@ public class TimetingFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-                Log.i("tag+++++....", response.toString());
+                Log.i("预约获取店铺数据", response.toString());
                 super.onSuccess(statusCode, headers, response);
             }
 
@@ -384,12 +395,7 @@ public class TimetingFragment extends Fragment {
         TimeThreeFragment timeThreeFragment = new TimeThreeFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
         TimeFourFragment timeFourFragment = new TimeFourFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
         TimeFiveFragment timeFiveFragment = new TimeFiveFragment(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
-
-//        TimeOneFragment timeOneFragment = TimeOneFragment.newInstance(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
-//        TimeTwoFragment timeTwoFragment = TimeTwoFragment.newInstance(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
-//        TimeThreeFragment timeThreeFragment = TimeThreeFragment.newInstance(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
-//        TimeFourFragment timeFourFragment = TimeFourFragment.newInstance(mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
-//        TimeFiveFragment timeFiveFragment = TimeFiveFragment.newInstance (mNames,mPaths,mTimes,mStoreId,mDistance,mStart);
+//        EventBus.getDefault().post(new GetTimeting("333"));
         fragments.add(timeOneFragment);
         fragments.add(timeTwoFragment);
         fragments.add(timeThreeFragment);
